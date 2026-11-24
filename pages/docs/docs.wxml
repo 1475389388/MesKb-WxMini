@@ -1,0 +1,67 @@
+<view class="page">
+
+  <!-- ============ 自定义导航栏 ============ -->
+  <view class="nav" style="padding-top:{{nav.statusBarHeight}}px">
+    <view class="nav-inner">
+      <view class="nav-title">文档知识库</view>
+      <view class="nav-btn" style="right:{{nav.rightPad}}px" bindtap="goQuery">
+        <view class="i i-searchwhite"></view>
+        <text>现场查询</text>
+      </view>
+    </view>
+  </view>
+  <view style="height:{{nav.navH}}px"></view>
+
+  <!-- ============ 搜索区 ============ -->
+  <view class="topbar" style="top:{{nav.navH}}px">
+    <view class="inputrow">
+      <view class="qbox">
+        <view class="i i-search q-ico"></view>
+        <input class="q" value="{{q}}" placeholder="输入关键字搜索 PPT、Word 文档…"
+               placeholder-class="q-ph" confirm-type="search"
+               bindinput="onInput" bindconfirm="onSearch" />
+        <view wx:if="{{q}}" class="i q-clear" bindtap="onClear">✕</view>
+      </view>
+      <view class="go-btn" bindtap="onSearch">搜索</view>
+    </view>
+  </view>
+
+  <!-- ============ 上传区 ============ -->
+  <view class="upzone" bindtap="onUpload">
+    <view class="i i-cloud up-ico"></view>
+    <view class="up-title">{{uploading ? '正在上传…' : '点击上传文档'}}</view>
+    <view class="up-sub">支持 PPT、Word、PDF 等格式</view>
+  </view>
+
+  <!-- ============ 加载中 ============ -->
+  <view wx:if="{{loading}}" class="card loading">
+    <view class="dots"><view class="d"></view><view class="d"></view><view class="d"></view></view>
+    <text>正在读取文档列表…</text>
+  </view>
+
+  <!-- ============ 空状态 ============ -->
+  <view wx:if="{{!loading && docs.length === 0}}" class="card empty">
+    <view class="empty-t">{{q ? '没有找到相关文档' : '还没有上传任何文档'}}</view>
+    <view class="empty-s">{{q ? '换个关键字试试，或点上面虚线框上传' : '点上面虚线框，从微信聊天记录里选 PPT / Word / PDF'}}</view>
+  </view>
+
+  <!-- ============ 文档列表 ============ -->
+  <view class="list">
+    <view wx:for="{{docs}}" wx:key="id" class="doc" data-id="{{item.id}}" bindtap="onOpenDoc">
+      <view class="doc-ico {{item.type === 'PPT' || item.type === 'PPTX' ? 'ico-ppt' : (item.type === 'PDF' ? 'ico-pdf' : (item.type === 'XLS' || item.type === 'XLSX' ? 'ico-xls' : 'ico-doc'))}}">
+        <text class="doc-ico-t">{{item.type === 'PPTX' ? 'PPT' : (item.type === 'DOCX' ? 'DOC' : (item.type === 'XLSX' ? 'XLS' : item.type))}}</text>
+      </view>
+      <view class="doc-main">
+        <text class="doc-title">{{item.title}}</text>
+        <text class="doc-sub">{{item.sizeText}}　{{item.date}}</text>
+      </view>
+      <view class="i i-chevron doc-arrow"></view>
+    </view>
+  </view>
+
+  <!-- ============ 底部说明 ============ -->
+  <view class="srv">共 {{total}} 份资料 · 点击任意文件即可用微信自带的阅读器打开预览</view>
+  <view class="srv2" bindtap="onEditBaseUrl">服务器：{{baseUrl}} · 点此修改</view>
+
+  <view style="height:60rpx"></view>
+</view>

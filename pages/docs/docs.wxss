@@ -1,0 +1,143 @@
+.page { padding-bottom: 40rpx; }
+
+/* ---------- 搜索区 ---------- */
+.topbar {
+  position: sticky;
+  z-index: 9;
+  background: #f2f5f9;
+  padding: 16rpx 24rpx 8rpx;
+}
+.inputrow { display: flex; align-items: center; }
+.qbox {
+  flex: 1 1 auto;
+  min-width: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  height: 88rpx;
+  padding: 0 20rpx 0 22rpx;
+  background: #fff;
+  border: 1rpx solid #e6ecf3;
+  border-radius: 44rpx;
+  box-shadow: 0 2rpx 10rpx rgba(16, 36, 64, 0.05);
+}
+.q-ico { width: 34rpx; height: 34rpx; }
+.q {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 88rpx;
+  margin: 0 14rpx;
+  font-size: 28rpx;
+  color: #12202e;
+}
+.q-ph { color: #a8b3c1; font-size: 27rpx; }
+.q-clear { width: 32rpx; height: 32rpx; color: #b8c2ce; font-size: 26rpx; text-align: center; line-height: 32rpx; }
+
+.go-btn {
+  flex: none;
+  height: 88rpx;
+  line-height: 88rpx;
+  margin-left: 12rpx;
+  padding: 0 34rpx;
+  border-radius: 20rpx;
+  background: #0f62c4;
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: 700;
+  box-shadow: 0 6rpx 16rpx rgba(15, 98, 196, 0.28);
+}
+
+/* ---------- 上传区（虚线框） ---------- */
+.upzone {
+  margin: 12rpx 24rpx 24rpx;
+  padding: 44rpx 24rpx 40rpx;
+  background: #fff;
+  border: 2rpx dashed #b9d3f2;
+  border-radius: 24rpx;
+  text-align: center;
+}
+.up-ico { width: 92rpx; height: 92rpx; margin: 0 auto 14rpx; }
+.up-title { font-size: 32rpx; font-weight: 700; color: #12202e; }
+.up-sub { font-size: 24rpx; color: #a0adbd; margin-top: 10rpx; }
+
+/* ---------- 文档列表 ---------- */
+.list { padding: 0 24rpx; }
+.doc {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 22rpx 24rpx;
+  margin-bottom: 18rpx;
+  box-shadow: 0 2rpx 12rpx rgba(16, 36, 64, 0.05);
+}
+.doc-ico {
+  flex: none;
+  width: 76rpx;
+  height: 76rpx;
+  border-radius: 14rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.doc-ico-t { color: #fff; font-size: 24rpx; font-weight: 700; letter-spacing: 1rpx; }
+.ico-ppt { background: linear-gradient(150deg, #e8703a 0%, #d1442c 100%); }
+.ico-doc { background: linear-gradient(150deg, #3b74c9 0%, #2b579a 100%); }
+.ico-pdf { background: linear-gradient(150deg, #e8564a 0%, #cf2f26 100%); }
+.ico-xls { background: linear-gradient(150deg, #2f9e6a 0%, #1e7145 100%); }
+
+.doc-main { flex: 1; min-width: 0; margin-left: 20rpx; }
+.doc-title {
+  display: block;
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #12202e;
+  line-height: 1.45;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.doc-sub { font-size: 23rpx; color: #9aa7b6; }
+.doc-arrow { width: 28rpx; height: 28rpx; margin-left: 10rpx; }
+
+/* ---------- 状态 ---------- */
+.loading, .empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7d90;
+  font-size: 28rpx;
+  padding: 36rpx 30rpx;
+}
+.empty { flex-direction: column; text-align: center; }
+.empty-t { font-size: 30rpx; font-weight: 600; color: #33475c; }
+.empty-s { font-size: 24rpx; color: #a0adbd; margin-top: 10rpx; line-height: 1.6; }
+
+.dots { display: flex; margin-right: 14rpx; }
+.dots .d {
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 6rpx;
+  background: #0f62c4;
+  margin-right: 6rpx;
+  animation: blink 1.2s infinite ease-in-out;
+}
+.dots .d:nth-child(2) { animation-delay: 0.2s; }
+.dots .d:nth-child(3) { animation-delay: 0.4s; }
+@keyframes blink { 0%, 100% { opacity: 0.25; } 50% { opacity: 1; } }
+
+/* ---------- 底部 ---------- */
+.srv {
+  text-align: center;
+  font-size: 22rpx;
+  color: #a6b3c1;
+  padding: 20rpx 24rpx 4rpx;
+  line-height: 1.7;
+}
+.srv2 {
+  text-align: center;
+  font-size: 22rpx;
+  color: #b8c2ce;
+  padding: 6rpx 24rpx 10rpx;
+  word-break: break-all;
+}

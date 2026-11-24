@@ -1,0 +1,18 @@
+{
+  "pages": [
+    "pages/query/query",
+    "pages/docs/docs"
+  ],
+  "window": {
+    "navigationStyle": "custom",
+    "navigationBarTitleText": "MES 现场知识问答",
+    "navigationBarBackgroundColor": "#0f62c4",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f2f5f9",
+    "backgroundTextStyle": "dark",
+    "enablePullDownRefresh": false
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

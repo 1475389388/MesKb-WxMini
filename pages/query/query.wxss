@@ -1,0 +1,349 @@
+.page { padding-bottom: 40rpx; }
+
+/* ============================================================
+   搜索区
+   ============================================================ */
+.searchbox {
+  position: sticky;
+  z-index: 9;
+  background: #f2f5f9;
+  padding: 16rpx 24rpx 12rpx;
+}
+.inputrow { display: flex; align-items: center; }
+
+/* 输入框（药丸形，内含放大镜与麦克风） */
+.qbox {
+  flex: 1 1 auto;
+  min-width: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  height: 88rpx;
+  padding: 0 18rpx 0 22rpx;
+  background: #fff;
+  border: 1rpx solid #e6ecf3;
+  border-radius: 44rpx;
+  box-shadow: 0 2rpx 10rpx rgba(16, 36, 64, 0.05);
+}
+.q-ico { width: 34rpx; height: 34rpx; }
+.q {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 88rpx;
+  margin: 0 14rpx;
+  font-size: 28rpx;
+  color: #12202e;
+}
+.q-ph { color: #a8b3c1; font-size: 27rpx; }
+.q-mic { width: 40rpx; height: 40rpx; padding: 6rpx; box-sizing: content-box; }
+
+/* 相机按钮（图纸里是白色方块 + 深色相机） */
+.cam-btn {
+  flex: none;
+  width: 88rpx;
+  height: 88rpx;
+  margin-left: 12rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1rpx solid #e6ecf3;
+  border-radius: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(16, 36, 64, 0.05);
+}
+.cam-btn .i { width: 44rpx; height: 44rpx; }
+
+/* 查询按钮 */
+.go-btn {
+  flex: none;
+  height: 88rpx;
+  line-height: 88rpx;
+  margin-left: 12rpx;
+  padding: 0 30rpx;
+  border-radius: 20rpx;
+  background: #0f62c4;
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: 700;
+  letter-spacing: 2rpx;
+  box-shadow: 0 6rpx 16rpx rgba(15, 98, 196, 0.28);
+}
+.go-btn.go-busy { opacity: 0.6; }
+
+/* 文档管理入口：放在「查询」按钮下面 */
+.docrow { margin-top: 12rpx; }
+.doc-btn {
+  display: flex;
+  align-items: center;
+  height: 76rpx;
+  padding: 0 20rpx;
+  background: #fff;
+  border: 1rpx solid #e6ecf3;
+  border-radius: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(16, 36, 64, 0.05);
+}
+.doc-btn .i { width: 34rpx; height: 34rpx; }
+.doc-btn-t {
+  font-size: 27rpx;
+  font-weight: 700;
+  color: #12202e;
+  margin-left: 12rpx;
+}
+.doc-btn-sub {
+  flex: 1;
+  min-width: 0;
+  font-size: 22rpx;
+  color: #a0adbd;
+  margin-left: 12rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.doc-btn-arrow { width: 26rpx; height: 26rpx; margin-left: 8rpx; }
+
+/* 工艺分类胶囊 */
+.chips { white-space: nowrap; margin-top: 16rpx; }
+.chip {
+  display: inline-block;
+  padding: 10rpx 30rpx;
+  margin-right: 14rpx;
+  background: #fff;
+  border: 1rpx solid #e6ecf3;
+  border-radius: 32rpx;
+  font-size: 26rpx;
+  color: #33475c;
+  line-height: 1.5;
+}
+.chip.on {
+  background: #0f62c4;
+  border-color: #0f62c4;
+  color: #fff;
+  font-weight: 600;
+}
+
+.hot { margin-top: 14rpx; font-size: 24rpx; color: #6b7d90; line-height: 1.9; }
+.hot-label { color: #93a1b1; }
+.hot-item { color: #0f62c4; margin-right: 18rpx; text-decoration: underline; }
+
+/* ============================================================
+   通用文字
+   ============================================================ */
+.title { font-size: 38rpx; font-weight: 700; line-height: 1.4; margin: 10rpx 0 8rpx; }
+.meta { font-size: 22rpx; color: #93a1b1; }
+.tags { margin-bottom: 8rpx; }
+
+/* 结论 */
+.conclusion {
+  background: #f2f8ff;
+  border: 2rpx solid #cfe2fb;
+  border-radius: 18rpx;
+  padding: 22rpx 24rpx;
+  margin: 18rpx 0 14rpx;
+}
+.c-label { font-size: 22rpx; color: #0f62c4; font-weight: 700; letter-spacing: 2rpx; margin-bottom: 8rpx; }
+.c-text { font-size: 34rpx; font-weight: 700; line-height: 1.6; color: #0c2745; }
+
+/* 操作按钮行 */
+.actions { display: flex; }
+.actions .act {
+  flex: 1;
+  margin: 0 12rpx 0 0;
+  height: 72rpx;
+  line-height: 72rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: #0f62c4;
+  background: #f2f8ff;
+  border: 1rpx solid #cfe2fb;
+  border-radius: 14rpx;
+  padding: 0;
+  font-weight: 600;
+}
+.actions .act:last-child { margin-right: 0; }
+.actions .act::after { border: none; }
+
+/* 列表 */
+.li { display: flex; margin-bottom: 14rpx; }
+.li-text { flex: 1; font-size: 29rpx; line-height: 1.7; color: #1b2431; }
+.idx {
+  width: 40rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  border-radius: 20rpx;
+  background: #eef2f7;
+  color: #6b7d90;
+  font-size: 22rpx;
+  margin-right: 14rpx;
+  flex: none;
+}
+.idx.step { background: #eaf2fd; color: #0f62c4; font-weight: 700; }
+
+/* 参数 */
+.param { padding: 14rpx 0; border-bottom: 1rpx solid #eef2f7; }
+.p-k { font-size: 27rpx; color: #33475c; }
+.p-v { display: block; font-size: 30rpx; font-weight: 700; color: #0f62c4; margin: 4rpx 0; }
+.p-n { font-size: 23rpx; color: #93a1b1; }
+
+/* 风险 / 未命中 */
+.risk { background: #fffbf2; border: 1rpx solid #f2dfb8; }
+.risk-h { color: #8a5a00; }
+.risk-li { font-size: 28rpx; line-height: 1.7; color: #6d4a05; margin-bottom: 8rpx; }
+.miss { background: #fffdf7; border: 1rpx solid #f0d7a8; }
+.miss-h { color: #8a5a00; }
+
+/* 相关条目 */
+.rel {
+  display: flex;
+  align-items: center;
+  padding: 18rpx 0;
+  border-bottom: 1rpx solid #eef2f7;
+}
+.rel:last-child { border-bottom: none; }
+.rel-main { flex: 1; min-width: 0; }
+.rel-t { display: block; font-size: 29rpx; font-weight: 600; color: #12202e; }
+.rel-s { font-size: 23rpx; color: #93a1b1; }
+.rel .i { width: 30rpx; height: 30rpx; margin-left: 12rpx; }
+
+/* 拍照卡 */
+.photo { padding: 22rpx; }
+.photo-head { display: flex; }
+.shot { width: 190rpx; height: 190rpx; border-radius: 14rpx; background: #000; flex: none; }
+.photo-info { flex: 1; margin-left: 20rpx; min-width: 0; }
+.ocr {
+  display: block;
+  font-size: 24rpx;
+  color: #33475c;
+  line-height: 1.6;
+  max-height: 210rpx;
+  overflow: hidden;
+}
+.ocr-tip { font-size: 24rpx; color: #93a1b1; line-height: 1.6; }
+
+/* ============================================================
+   「怎么用」卡片（图纸：带编号圆点的三步）
+   ============================================================ */
+.welcome { padding: 30rpx 30rpx 22rpx; }
+.w-head { display: flex; align-items: center; margin-bottom: 20rpx; }
+.w-ico { width: 34rpx; height: 34rpx; margin-right: 10rpx; }
+.w-title { font-size: 32rpx; font-weight: 700; color: #12202e; }
+.w-row { display: flex; align-items: flex-start; margin-bottom: 20rpx; }
+.w-row:last-child { margin-bottom: 0; }
+.w-num {
+  flex: none;
+  width: 42rpx;
+  height: 42rpx;
+  line-height: 42rpx;
+  text-align: center;
+  border-radius: 21rpx;
+  background: #eaf2fd;
+  color: #0f62c4;
+  font-size: 24rpx;
+  font-weight: 700;
+  margin-right: 16rpx;
+  margin-top: 4rpx;
+}
+.w-text { flex: 1; font-size: 29rpx; line-height: 1.72; color: #33475c; }
+.w-strong { color: #0f62c4; font-weight: 700; }
+
+/* ============================================================
+   状态提示
+   ============================================================ */
+.loading, .err {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  color: #6b7d90;
+  padding: 30rpx;
+}
+.err { color: #c8273f; background: #fdf2f5; border: 1rpx solid #f0c4ce; }
+.dots { display: flex; margin-right: 14rpx; }
+.dots .d {
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 6rpx;
+  background: #0f62c4;
+  margin-right: 6rpx;
+  animation: blink 1.2s infinite ease-in-out;
+}
+.dots .d:nth-child(2) { animation-delay: 0.2s; }
+.dots .d:nth-child(3) { animation-delay: 0.4s; }
+@keyframes blink { 0%, 100% { opacity: 0.25; } 50% { opacity: 1; } }
+
+/* ============================================================
+   底部服务器地址
+   ============================================================ */
+.srv {
+  text-align: center;
+  font-size: 22rpx;
+  color: #a6b3c1;
+  padding: 26rpx 24rpx 10rpx;
+  line-height: 1.7;
+  word-break: break-all;
+}
+
+/* ============================================================
+   悬浮麦克风（图纸底部大蓝圆）+ 录音浮层
+   ============================================================ */
+.fab {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 56rpx;
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 60rpx;
+  background: linear-gradient(160deg, #2a86f0 0%, #0f62c4 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10rpx 28rpx rgba(15, 98, 196, 0.42);
+  z-index: 60;
+}
+.fab-ico { width: 56rpx; height: 56rpx; }
+.fab-on {
+  background: linear-gradient(160deg, #f0653f 0%, #d8402a 100%);
+  box-shadow: 0 10rpx 28rpx rgba(216, 64, 42, 0.45);
+}
+
+.rec-mask {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(9, 20, 34, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 300;
+}
+.rec-panel {
+  width: 460rpx;
+  background: #fff;
+  border-radius: 28rpx;
+  padding: 44rpx 30rpx 36rpx;
+  text-align: center;
+  box-shadow: 0 16rpx 48rpx rgba(9, 20, 34, 0.28);
+}
+.wave { display: flex; align-items: flex-end; justify-content: center; height: 80rpx; margin-bottom: 18rpx; }
+.wave .bar {
+  width: 12rpx;
+  margin: 0 7rpx;
+  border-radius: 6rpx;
+  background: #0f62c4;
+  animation: wave 0.9s infinite ease-in-out;
+}
+.b1 { height: 26rpx; animation-delay: 0s; }
+.b2 { height: 52rpx; animation-delay: 0.12s; }
+.b3 { height: 76rpx; animation-delay: 0.24s; }
+.b4 { height: 46rpx; animation-delay: 0.36s; }
+.b5 { height: 24rpx; animation-delay: 0.48s; }
+@keyframes wave {
+  0%, 100% { transform: scaleY(0.45); }
+  50% { transform: scaleY(1); }
+}
+.rec-title { font-size: 32rpx; font-weight: 700; color: #12202e; }
+.rec-sub { font-size: 24rpx; color: #8a97a8; margin-top: 10rpx; }

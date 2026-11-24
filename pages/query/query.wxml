@@ -1,0 +1,208 @@
+<view class="page">
+
+  <!-- ============ 自定义导航栏 ============ -->
+  <view class="nav" style="padding-top:{{nav.statusBarHeight}}px">
+    <view class="nav-inner">
+      <view class="nav-title">现场查询</view>
+    </view>
+  </view>
+  <view style="height:{{nav.navH}}px"></view>
+
+  <!-- ============ 搜索区（吸顶） ============ -->
+  <view class="searchbox" style="top:{{nav.navH}}px">
+    <view class="inputrow">
+      <view class="qbox">
+        <view class="i i-search q-ico"></view>
+        <input class="q" value="{{q}}" placeholder="说出或输入现象，如：过站提示工序顺序错误"
+               placeholder-class="q-ph" confirm-type="search"
+               bindinput="onInput" bindconfirm="onConfirm" />
+        <view class="i i-mic q-mic" bindtap="onTapMic"></view>
+      </view>
+      <view class="cam-btn" bindtap="onTakePhoto">
+        <view class="i i-camera"></view>
+      </view>
+      <view class="go-btn {{loading ? 'go-busy' : ''}}" bindtap="onConfirm">查询</view>
+    </view>
+
+    <!-- 文档管理：放在「查询」按钮下面 -->
+    <view class="docrow">
+      <view class="doc-btn" bindtap="goDocs">
+        <view class="i i-doc"></view>
+        <text class="doc-btn-t">文档管理</text>
+        <text class="doc-btn-sub">PPT / Word / PDF 操作手册</text>
+        <view class="i i-chevron doc-btn-arrow"></view>
+      </view>
+    </view>
+
+    <scroll-view class="chips" scroll-x="true" enable-flex="true">
+      <view wx:for="{{industries}}" wx:key="*this"
+            class="chip {{industry === item ? 'on' : ''}}"
+            data-ind="{{item}}" bindtap="onPickIndustry">{{item}}</view>
+    </scroll-view>
+
+    <view wx:if="{{hot.length}}" class="hot">
+      <text class="hot-label">大家在问：</text>
+      <text wx:for="{{hot}}" wx:key="*this" class="hot-item" data-q="{{item}}" bindtap="onTapHot">{{item}}</text>
+    </view>
+  </view>
+
+  <!-- ============ 错误提示 ============ -->
+  <view wx:if="{{errMsg}}" class="card err">{{errMsg}}</view>
+
+  <!-- ============ 加载中 ============ -->
+  <view wx:if="{{loading}}" class="card loading">
+    <view class="dots"><view class="d"></view><view class="d"></view><view class="d"></view></view>
+    <text>{{voiceBusy ? '正在识别语音…' : '正在查询…'}}</text>
+  </view>
+
+  <!-- ============ 拍照结果 ============ -->
+  <view wx:if="{{photoUrl}}" class="card photo">
+    <view class="photo-head">
+      <image class="shot" src="{{photoUrl}}" mode="aspectFill" bindtap="previewPhoto"></image>
+      <view class="photo-info">
+        <view class="tags">
+          <text class="tag tag-code">拍照识别</text>
+          <text class="tag {{ocrOk ? 'tag-ind' : 'tag-mod'}}">{{ocrOk ? '已识别文字' : '未识别出文字'}}</text>
+        </view>
+        <text wx:if="{{ocrText}}" class="ocr">{{ocrText}}</text>
+        <text wx:else class="ocr-tip">没识别出文字，请把关键字（错误码、报警字样）输入到搜索框再查。</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- ============ 命中：答案卡 ============ -->
+  <block wx:if="{{entry}}">
+    <view class="card">
+      <view class="tags">
+        <text class="tag tag-code">{{entry.code}}</text>
+        <text class="tag tag-ind">{{entry.industry}}</text>
+        <text class="tag tag-mod">{{entry.module}}</text>
+      </view>
+      <view class="title">{{entry.title}}</view>
+      <view class="meta">更新 {{entry.updatedShort}} · 查阅 {{entry.views}} 次</view>
+
+      <view class="conclusion">
+        <view class="c-label">结论</view>
+        <view class="c-text">{{entry.conclusion}}</view>
+      </view>
+
+      <view class="actions">
+        <view class="act" bindtap="onCopyConclusion">复制结论</view>
+        <view class="act" bindtap="onCopyAll">复制全文</view>
+        <button class="act" open-type="share">转发</button>
+      </view>
+    </view>
+
+    <view wx:if="{{entry.symptom}}" class="card">
+      <view class="h2">现象</view>
+      <view class="text">{{entry.symptom}}</view>
+    </view>
+
+    <view wx:if="{{entry.causesList.length}}" class="card">
+      <view class="h2">可能原因（按可能性排序）</view>
+      <view wx:for="{{entry.causesList}}" wx:key="i" class="li">
+        <text class="idx">{{item.i}}</text>
+        <text class="li-text">{{item.t}}</text>
+      </view>
+    </view>
+
+    <view wx:if="{{entry.stepsList.length}}" class="card">
+      <view class="h2">处理步骤</view>
+      <view wx:for="{{entry.stepsList}}" wx:key="i" class="li">
+        <text class="idx step">{{item.i}}</text>
+        <text class="li-text">{{item.t}}</text>
+      </view>
+    </view>
+
+    <view wx:if="{{entry.paramsList.length}}" class="card">
+      <view class="h2">关键参数 / 标准</view>
+      <view wx:for="{{entry.paramsList}}" wx:key="k" class="param">
+        <text class="p-k">{{item.k}}</text>
+        <text class="p-v">{{item.v}}</text>
+        <text wx:if="{{item.note}}" class="p-n">{{item.note}}</text>
+      </view>
+    </view>
+
+    <view wx:if="{{entry.risks.length}}" class="card risk">
+      <view class="h2 risk-h">风险提示（别踩这些坑）</view>
+      <view wx:for="{{entry.risks}}" wx:key="*this" class="risk-li">· {{item}}</view>
+    </view>
+
+    <view wx:if="{{results.length}}" class="card">
+      <view class="h2">还可能相关</view>
+      <view wx:for="{{results}}" wx:key="id" class="rel" data-id="{{item.id}}" bindtap="onOpenEntry">
+        <view class="rel-main">
+          <text class="rel-t">{{item.title}}</text>
+          <text class="rel-s">{{item.industry}} · {{item.module}}</text>
+        </view>
+        <view class="i i-chevron"></view>
+      </view>
+    </view>
+  </block>
+
+  <!-- ============ 未命中 ============ -->
+  <block wx:if="{{miss && !loading}}">
+    <view class="card miss">
+      <view class="h2 miss-h">没有找到匹配的答案</view>
+      <view class="text">这次查询<b>已自动记录</b>{{missCount > 1 ? '（同一问题已记录 ' + missCount + ' 次，会优先补充）' : ''}}，
+        维护人员会在后台「待补充清单」里看到并补充。</view>
+      <view class="text quiet">请把这句原话告诉工艺 / IT：「{{q}}」</view>
+    </view>
+    <view wx:if="{{results.length}}" class="card">
+      <view class="h2">最接近的条目</view>
+      <view wx:for="{{results}}" wx:key="id" class="rel" data-id="{{item.id}}" bindtap="onOpenEntry">
+        <view class="rel-main">
+          <text class="rel-t">{{item.title}}</text>
+          <text class="rel-s">{{item.industry}} · {{item.module}}</text>
+        </view>
+        <view class="i i-chevron"></view>
+      </view>
+    </view>
+  </block>
+
+  <!-- ============ 使用说明（图纸里的「怎么用」卡片） ============ -->
+  <view wx:if="{{!entry && !miss && !loading && !errMsg && !photoUrl}}" class="card welcome">
+    <view class="w-head">
+      <view class="i i-help w-ico"></view>
+      <text class="w-title">怎么用</text>
+    </view>
+    <view class="w-row">
+      <text class="w-num">1</text>
+      <text class="w-text">用一句话说出现象（土话也行），或点「拍照」拍 MES 报错界面 / 设备报警屏。</text>
+    </view>
+    <view class="w-row">
+      <text class="w-num">2</text>
+      <text class="w-text">先看<text class="w-strong">【结论】</text>——照那一句做；下面依次是原因、步骤、关键参数、风险提示。</text>
+    </view>
+    <view class="w-row">
+      <text class="w-num">3</text>
+      <text class="w-text">需要留痕就点「复制全文」，粘贴到班组群或工单里。</text>
+    </view>
+  </view>
+
+  <!-- ============ 服务器地址（换 IP 不用改代码） ============ -->
+  <view class="srv" bindtap="onEditBaseUrl">服务器：{{baseUrl}} · 点此修改</view>
+
+  <view style="height:200rpx"></view>
+
+  <!-- ============ 悬浮麦克风（图纸底部大圆按钮） ============ -->
+  <view class="fab {{recording ? 'fab-on' : ''}}"
+        bindtouchstart="onVoiceStart"
+        bindtouchend="onVoiceEnd"
+        bindtouchcancel="onVoiceEnd">
+    <view class="i i-micwhite fab-ico"></view>
+  </view>
+
+  <!-- ============ 录音浮层 ============ -->
+  <view wx:if="{{recording}}" class="rec-mask">
+    <view class="rec-panel">
+      <view class="wave">
+        <view class="bar b1"></view><view class="bar b2"></view><view class="bar b3"></view>
+        <view class="bar b4"></view><view class="bar b5"></view>
+      </view>
+      <view class="rec-title">正在听你说话…</view>
+      <view class="rec-sub">松开手指 → 自动识别并查询</view>
+    </view>
+  </view>
+
+</view>
